@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WEB2000 Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid p-4 mb-2 bg-light text-dark">
+    <a class="navbar-brand text-success" href="#home"><h1>Cool Tunes</h1></a>
+        <a class="btn btn-outline-secondary mx-5 my-sm-0 float-right" href="home.html" type="submit">Home</a>
+    </div>
+    <div class="container">
+        <h1>Welcome to the Music Library</h1>
+        <p class="lead">Here you will find your selection of downloaded music. To reach a track list of an album, simply
+            click it to continue.</p>
+    </div>
+    <div class="container">
+        <div id="albums" class="row">
+        </div>
+    </div>
+
+    <script src="project.js"></script>
+    <script>
+        var albumsContainer = document.getElementById('albums');
+        var html = '';
+
+        albums.forEach(album => {
+            html += `
+                    <div class="col-4">
+                        <a href="album.html?id=`+ album.id + `">
+                            <figure class="figure">
+                                <img src="`+ album.picture + `" class="figure-img img-fluid rounded" alt="..." a href= "">
+                                <figcaption class="figure-caption">`+ album.title + `<br>` + album.author + `</br></figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                `;
+        });
+        albumsContainer.innerHTML = html;
+
+    </script>
+</body>
+
+</html>

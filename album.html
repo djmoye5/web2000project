@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WEB2000 Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid p-4 mb-2 bg-light text-dark">
+        <a class="navbar-brand text-success" href="#home"><h1>Cool Tunes</h1></a>
+        <a class="btn btn-outline-secondary mx-5 my-sm-0 float-right" href="home.html" type="submit">Home</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img id="albumArt" src="" class="img-fluid rounded" alt="Responsive image">
+                <h1 id="albumTitle"></h1>
+                <p id="albumAuthor"></p>
+            </div>
+            <div class="col-6" id="songs"></div>
+        </div>
+    </div>
+    <script src="project.js"></script>
+    <script>
+        var albumId = getParameterByName('id');
+        var album = albums[albumId-1]; // album picked up
+
+        var albumArt = document.getElementById('albumArt');
+        albumArt.src = album.picture; 
+
+        var albumTitle = document.getElementById('albumTitle');
+        albumTitle.innerHTML = album.title;
+        
+        var albumAuthor = document.getElementById('albumAuthor');
+        albumAuthor.innerHTML = album.author; 
+
+        var html = '';
+        album.songs.forEach(song => {
+            html += `
+                <div>
+                    <p>`+song.title+`</p>
+                    <audio controls>
+                        <source src="`+song.file+`" type="audio/mp3"></source>
+                    </audio>
+                </div>
+            `;
+        });
+
+        var songContainer = document.getElementById('songs');
+        songContainer.innerHTML = html;
+
+
+        function getParameterByName(name) {
+            url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    </script>
+
+</body>
+
+</html>
